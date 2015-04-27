@@ -6,3 +6,4 @@ Might also be nice to see:
 * Reflection
 * Markdown
 * Haml
+* HTTP request and response without needing to go run servers
