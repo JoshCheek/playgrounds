@@ -829,6 +829,21 @@ And you can play with these things without any of it:
 
 ![Example of writing HTTP with just netcat](nc-http-response.gif)
 
+Some things to try:
+
+* Redirect the browser (status code and Location header)
+* Return some JSON (Content-Type, Content-Length headers, body)
+* Set a cookie (forgot what the header is, I think it's "Set-Cookie", then make a second request and see that the browser sends you back the cookie you set)
+* See how the path comes in (any request from the browser)
+* See how query params come in (any request from the browser)
+* See a form submission (edit any form on any page to point at your server -- another way is to start your Rails server,
+  request the form, stop the server, start nc on that port, and then submit it)
+* Decrypt a Rails session -- We can get the session from the cookie, and the secret_key_base from config/secrets.yml,
+  these should be all we need, but I'd have to look into how the encryption is done.
+* Render your own http response (probably have them write it independently, set the status, and the headers (Content-Type and Content-Length), and then paste the body in)
+* Render arbitrary other headers and see that they are present in the browser (Network tab from dev Webkit's dev tools)
+* Start nc on two different ports and redirect the browser from the one to the other, then you can see it come in twice.
+
 ```shell
 # A sever that will print the web request
 $ nc -l 8889
@@ -848,6 +863,10 @@ $ curl localhost:8889 -d key=value -d another-data-key=another-value
 
 
 ## Viewing a Raw HTTP Response
+
+You might also try placing a pry into here,
+and changing the values of the variables to see that setting these things causes the browser
+to do whatever you've told it to.
 
 ```shell
 # A simple server that you can access to play with values and see what happens
