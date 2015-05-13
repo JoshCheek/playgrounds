@@ -833,6 +833,7 @@ Some things to try:
 
 * Redirect the browser (status code and Location header)
 * Return some JSON (Content-Type, Content-Length headers, body)
+* Try starting the server on a couple of different ports
 * Set a cookie (forgot what the header is, I think it's "Set-Cookie", then make a second request and see that the browser sends you back the cookie you set)
 * See how the path comes in (any request from the browser)
 * See how query params come in (any request from the browser)
@@ -843,6 +844,7 @@ Some things to try:
 * Render your own http response (probably have them write it independently, set the status, and the headers (Content-Type and Content-Length), and then paste the body in)
 * Render arbitrary other headers and see that they are present in the browser (Network tab from dev Webkit's dev tools)
 * Start nc on two different ports and redirect the browser from the one to the other, then you can see it come in twice.
+* Often, a redirect url will be sent.
 
 ```shell
 # A sever that will print the web request
@@ -889,3 +891,42 @@ $ curl -is www.google.com | ruby -pe 'exit if /^\r\n$/'
 ```
 
 ![Viewing a response](https://github.com/wrightcheek/build-a-webserver/raw/master/view-response.gif)
+
+
+## What is an IP address?
+
+I don't fully grasp all of this stuff, but I think that seeing the address of the server is really helpful.
+So:
+
+```
+$ ping google.com
+PING google.com (216.58.217.14): 56 data bytes
+64 bytes from 216.58.217.14: icmp_seq=0 ttl=55 time=15.197 ms
+^C
+```
+
+And now go to your browser and type in `http://216.58.217.14/`, you'll be at the Google homepage,
+that's it's address! You can also include the port here. By default, it's 80, so if you don't see it,
+then that's the port that it came in on, try it: `http://216.58.217.14:80/`
+
+Make it a point to emphasize that port 80 for google is Just like the 3000 that they use by default with their Rails apps.
+Show them that "localhost" has an address, too:
+
+```
+$ cat /etc/hosts
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.127localhost
+255.255.255.255broadcasthost
+::1             localhost
+fe80::1%lo0localhost
+```
+
+So they can start a server, on port 3000, and navigate the browser to `http://127.0.0.1:3000`,
+and it will be the same as hitting `localhost:3000`.
+
+Other notes for making this concrete: https://gist.github.com/JoshCheek/7f8c5afb8850c5cb8f22
