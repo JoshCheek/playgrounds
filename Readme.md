@@ -823,6 +823,12 @@ __END__
 
 ## Viewing a Raw HTTP Request
 
+Here is a nice way to interact with HTTP that doesn't require any Ruby or Rails or anything.
+All that stuff Rails gives you, it's to get a server that writes this stuff, at the end of the day.
+And you can play with these things without any of it:
+
+![Example of writing HTTP with just netcat](nc-http-response.gif)
+
 ```shell
 # A sever that will print the web request
 $ nc -l 8889
