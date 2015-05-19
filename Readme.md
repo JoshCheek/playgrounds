@@ -930,3 +930,5 @@ So they can start a server, on port 3000, and navigate the browser to `http://12
 and it will be the same as hitting `localhost:3000`.
 
 Other notes for making this concrete: https://gist.github.com/JoshCheek/7f8c5afb8850c5cb8f22
+
+How to decrypt your session cookie https://gist.github.com/JoshCheek/7b1c1eb231dfa83098be
